@@ -1,0 +1,71 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{%- minify -%}
+{% set baseUrl = alias('@baseUrl') ~ '/' %}
+{% header "Link: <#{baseUrl}>; rel=dns-prefetch;,<#{baseUrl}>; rel=preconnect; crossorigin;" %}
+<!DOCTYPE html>
+{%- endminify -%}
+<html lang="{{ craft.app.language |slice(0,2) }}" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+    {%- minify -%}
+        {% include "_layouts/_head.twig" %}
+    {%- endminify -%}
+    {%- minify  -%}
+    <link rel="stylesheet" href="{{ mix('/css/site.css') }}">
+
+
+    {# -- </head> JS -- #}
+    {% block head_js %}{% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <script>
+        WebFontConfig = {
+            google: {
+                families: ['Quicksand:300,400,700']
+            }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+</head>
+
+{# -- HTML Body -- #}
+<body class="leading-normal font-sans tracking-normal text-base text-black">
+    <div id="site">
+
+        {# -- Header, including navbar.twig -- #}
+        {% include "_partials/_navbar.twig" %}
+        {% include "_partials/_header.twig" %}
+
+        <main>
+            {# -- Primary content block -- #}
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        {# -- Footer -- #}
+        {% include "_partials/_footer.twig" %}
+    </div>
+{#-- Browser fixes --#}
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+{# -- Scripts -- #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+<script src="{{ mix('/js/site.js') }}"></script>
+
+{# -- Inline JS -- #}
+{% block inline_js %}
+{% endblock %}
+
+{%- endminify -%}
+</body>
+</html>

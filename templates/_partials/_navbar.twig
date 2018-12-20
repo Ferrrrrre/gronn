@@ -1,0 +1,24 @@
+<nav class="bg-kcv-green py-2 shadow fixed w-full pin-t z-top">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+            <a href="/"><img src="{{ baseUrl }}assets/images/verde_logo.svg" alt="Kc Verde logo" class="h-18"></a>
+            {% set nav = craft.navigation.nodes('main').level(1).all() %}
+            <div class="flex items-center -mx-4">
+                {% for node in nav %}
+                    <a href="{{ node.url }}"
+                       class="mx-4 block no-underline text-light transition-sm
+                        {% if node.classes is not null %}{{ node.classes }}
+                            {% else %} border-b border-transparent border-solid
+                                    {% if node.active %}
+                                    border-kcv-black
+                                    {% else %}
+                                    hover:border-kcv-black
+                                    {% endif %}
+                                {% endif %}" {% if node.newWindow %}target="_blank"{% endif %}>
+                        {{ node.title }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</nav>

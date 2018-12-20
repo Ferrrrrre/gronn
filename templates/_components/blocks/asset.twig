@@ -1,0 +1,13 @@
+{% if asset.kind == 'image' %}
+    <picture class="absolute w-full h-full pin-t pin-l block z-d1 {{ class }}">
+            <img src="{{ baseUrl }}assets/images/{{ asset.filename }}" alt="{{ asset.title }}" class="h-full w-full">
+    </picture>
+{% endif %}
+
+{% if asset.kind == 'video' %}
+    <figure class="absolute pin-t pin-l h-full w-full z-d1 {{ class }}">
+        <video class="absolute pin-t pin-r min-h-full min-w-full w-auto h-auto block z-d1" title="{{ asset.title }}" autoplay loop muted playsinline>
+            <source src="{{ baseUrl }}assets/videos/{{ asset.filename }}" type="video/mp4" />
+        </video>
+    </figure>
+{% endif %}

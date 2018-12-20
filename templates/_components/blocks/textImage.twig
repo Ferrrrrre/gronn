@@ -1,0 +1,10 @@
+<div class="md:flex -mx-4 {% if block.position %} flex-row-reverse {% endif %} h-full">
+    <div class="w-full md:w-1/2 px-4">
+        {{ block.text }}
+    </div>
+    <div class="w-full md:w-1/2 px-4 relative">
+        <picture class="w-full h-full contain block absolute pin-t pin-r">
+            <img src="{{ block.image[0].url }}" alt="{{ block.image[0].title }}" class="h-full w-full">
+        </picture>
+    </div>
+</div>

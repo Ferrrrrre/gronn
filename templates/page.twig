@@ -1,0 +1,11 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% extends "_layouts/_layout.twig" %}
+
+{% block content %}
+
+    {%  include "_pages/" ~ entry.type.handle %}
+
+{% endblock %}
+
+{% block inline_js %}
+{% endblock %}

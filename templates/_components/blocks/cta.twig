@@ -1,0 +1,11 @@
+<div class="w-full py-16 relative">
+    {% include '_components/blocks/asset' with {
+        asset: block.ctaBackground.one,
+        class: 'overlay-g'
+    }%}
+    <div class="container mx-auto px-4 text-kcv-white text-center">
+        <h2 class="text-4xl">{{ block.ctaTitle }}</h2>
+        <div class="mx-auto w-3/4">{{ block.ctaDescription }}</div>
+        <a href="{{ block.ctaLink.url }}" class="p-2 mt-4 no-underline inline-block border-solid border-kcv-white border hover:bg-kcv-white hover:text-kcv-black-mild">{{ block.ctaLink.text }}</a>
+    </div>
+</div>

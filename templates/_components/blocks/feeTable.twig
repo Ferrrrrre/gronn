@@ -1,0 +1,16 @@
+<table class="">
+        <thead>
+            <tr class="text-left">
+                <th>Ploeg</th>
+                <th>Lidgeld</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for table in block.feeTable %}
+            <tr>
+                <td class="py-2 pr-8">{{ table.ploeg }}</td>
+                <td class="py-2">{{ table.lidgeld }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>

@@ -1,0 +1,15 @@
+@import '../../node_modules/slick-carousel/slick/slick.css';
+
+.slick-track{
+  display: flex;
+
+  .slick-slide{
+    float: none;
+    height: auto;
+    @apply m-2;
+
+    & > div {
+      @apply h-full;
+    }
+  }
+}

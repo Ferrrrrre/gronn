@@ -1,0 +1,25 @@
+<header>
+        <div class="relative overflow-hidden">
+            {% set asset = entry.headerBackground.one %}
+            {% include '_components/blocks/asset' with {
+                asset: entry.headerBackground.one,
+                class: 'overlay'
+            }%}
+
+            <div class="container mx-auto px-4 relative py-24">
+                <h1 class="text-kcv-white uppercase text-2xl md:text-3xl lg:text-5xl leading-normal">{{ entry.headerTitle }}</h1>
+                {% if entry.type.handle == 'teams' %}
+                    <h3 class="text-kcv-white bg-kcv-green-light p-2 my-2 inline-block">{{ entry.teamAge }}</h3>
+                {% else %}
+                    <div class="w-full md:w-1/2 my-6 font-light text-kcv-white leading-normal text-shadow">{{ entry.headerDescription|raw }}</div>
+                {% endif %}
+            </div>
+        </div>
+    {% if entry.type.handle == 'teams' %}
+        <div class="relative py-1 container mx-auto">
+            <div class="absolute pin-r pin-b">
+                <a href="/lidgeld" class="bg-kcv-green-light text-kcv-white text-light hover:bg-kcv-white hover:text-kcv-green-light border border-solid border-transparent hover:border-kcv-green-light p-4 z-top uppercase no-underline" href="/">Lidgeld</a>
+            </div>
+        </div>
+    {% endif %}
+</header>

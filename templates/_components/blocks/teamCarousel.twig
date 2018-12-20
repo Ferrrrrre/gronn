@@ -1,0 +1,28 @@
+<div class="">
+    {% if block.carouselTitle is defined or block.carouselDescription is defined %}
+        <div class="container mx-auto px-4 py-4">
+            <h2 class="text-3xl">{{ block.carouselTitle }}</h2>
+            <div class="mb-4 w-3/4">{{ block.carouselDescription|nl2br }}</div>
+        </div>
+    {% endif %}
+    <slick
+        ref="slick"
+        class="flex items-center"
+        :options="slickTeamOptions" >
+        {% for item in block.carousel %}
+            <a href="{{ item.linkUrl.url }}" class="no-underline group relative h-full hover:shadow-md transition-sm hover:-mt-2">
+                <picture class="overlay absolute block w-full h-full cover z-d1 pin-t pin-l">
+                    <img src="{{ item.image[0].url }}" alt="{{ item.image[0].title }}" class="w-full h-full">
+                </picture>
+                <div class="z-10 p-4 h-full flex flex-col justify-between">
+                    <h3 class="font-sans text-kcv-white font-bold text-center text-2xl bg-kcv-green-light">{{ item.subtitle }}</h3>
+                    <p class="my-2 text-center text-kcv-white p-4 text-shadow">{{ item.description }}</p>
+                    <button class="mx-4 border-kcv-green border-solid border-2 bg-kcv-green transition-sm text-kcv-white px-4 py-2 text-center">{{ item.linkUrl.text }}</button>
+                </div>
+            </a>
+        {% endfor %}
+    </slick>
+</div>
+
+
+

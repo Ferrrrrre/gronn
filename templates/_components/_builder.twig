@@ -1,0 +1,60 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+ # Pagebuilder include template
+ # -----------------------------
+ #
+ # This template is used to output HTML for the main content Matrix field.
+ #
+ # An `entry` variable is expected to be defined.
+-#}
+
+{% set closedLastRow = true %}
+{% set totalWidth = 0 %}
+
+{# Load all our blocks with eager loading #}
+{% set blocks = entry.builder.with([
+    'image:image',
+    'banner:bannerBackground',
+    'activities:activities',
+    'projects:projects',
+]).all %}
+
+{% for i, block in blocks %}
+    {# Calculate this block's width percentage #}
+    {# if block.width and block.width != 'full' %}
+        {% set widthPercentage = (block.width|split('/')|first|number / block.width|split('/')|last|number) * 100 %}
+    {% else %}
+        {% set widthPercentage = 100 %}
+    {% endif #}
+    {% set widthPercentage = 100 %}
+
+    {# Are we starting a new row? #}
+    {% if closedLastRow %}
+        {# Should this block be inside the container? #}
+        <div class="overflow-hidden my-16
+            {% if block.type.handle in ['text', 'textImage', 'feeTable'] %} container px-4 mx-auto {% endif %}
+        ">
+    {% endif %}
+
+    {# md:w-1/2 md:w-1/3 md:w-2/3 md:w-1/4 md:w-3/4 md:w-1/5 md:w-2/5 md:w-3/5 md:w-4/5 md:w-1/6 md:w-5/6 md:w-full #}
+    <div class="block-{{ block.type.handle }} w-full">
+        {# Load our component #}
+        {% include '_components/blocks/' ~ block.type.handle %}
+    </div>
+
+    {# If we closed the last row, totalWidth = this width, otherwise add to it #}
+    {% if closedLastRow %}
+        {% set totalWidth = widthPercentage %}
+    {% else %}
+        {% set totalWidth = totalWidth + widthPercentage %}
+    {% endif %}
+
+    {# Are we closing this row? #}
+    {% set nextIsFull = true %}
+    {% if nextIsFull or totalWidth >= 100 %}
+        </div>
+        {% set closedLastRow = true %}
+    {% else %}
+        {% set closedLastRow = false %}
+    {% endif %}
+{% endfor %}
